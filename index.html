@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja"
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Book Search</title>
+</head>
+<body>
+    <!-- ファイルの選択 -->
+    <input type="file" accept="image/*;capture=camera"  onchange="getFile(this);">
+
+    <!-- 画像データを表示する領域を定義 -->
+    <h3>画像データ</h3>
+    <div id="imagearea"></div>
+
+    <!-- Base64エンコードした結果を表示する領域を定義 -->
+    <h3>Base64データ</h3>
+    <textarea id="base64area" cols="50" rows="10"></textarea>
+
+    <!-- 検出したテキスト情報を表示する領域を定義 -->
+    <h3>検出テキスト</h3>
+    <div id="textarea"></div>
+
+    <!-- 書籍情報を表示する領域を定義 -->
+    <h3>書籍情報</h3>
+    <div id="bookarea"></div>
+
+    <script type="text/javascript" src="booksearch.js"></script>
+
+</body>
+</html>
