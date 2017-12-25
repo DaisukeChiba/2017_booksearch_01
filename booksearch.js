@@ -12,7 +12,8 @@ function getFile(imgfile) {
     var fr = new FileReader();
     fr.onload = function(evt){
         // 取得した画像を画面に表示
-        document.getElementById('imagearea').innerHTML = '<img src="' + evt.target.result + '" width="100">';
+        document.getElementById('imagearea').innerHTML =
+        '<img src="' + evt.target.result + '" width="100">';
         // Base64形式にエンコードした値を画面に表示
         document.getElementById('base64area').innerHTML = evt.target.result;
         // Base64形式データから先頭のファイル情報を削除(空文字に置換)
@@ -26,8 +27,6 @@ function getFile(imgfile) {
 // 画像からCloud Vision APIを使用してテキスト解析結果を取得
 function sendVisionAPI(base64string){
     // リクエストパラメータの生成
-    // image:Base64エンコードした画像データ
-    // type:テキスト検出
     var body = {
         requests: [
             {image: {content: base64string}, features: [{type: 'TEXT_DETECTION'}]}
@@ -41,7 +40,8 @@ function sendVisionAPI(base64string){
             console.log(req.responseText);
             var res = JSON.parse(req.responseText);
             // 画像全体のテキスト解析結果を画面に表示
-            document.getElementById('textarea').innerHTML = res.responses[0].textAnnotations[0].description;
+            document.getElementById('textarea').innerHTML =
+            res.responses[0].textAnnotations[0].description;
             // Google Books APIの呼び出し
             sendBooksAPI(res.responses[0].textAnnotations[0].description);
         }
@@ -49,7 +49,7 @@ function sendVisionAPI(base64string){
             document.getElementById('textarea').innerHTML = '取得エラー';
         }
     }
-    req.open('POST', 'https://vision.googleapis.com/v1/images:annotate?key=Google APIキーを設定', true);
+    req.open('POST', 'https://vision.googleapis.com/v1/images:annotate?key=APIキーを設定', true);
     req.setRequestHeader('Content-Type', 'application/json');
     req.send(JSON.stringify(body));
 }
@@ -64,8 +64,8 @@ function sendBooksAPI(bookstring){
             console.log(req.responseText);
             var res = JSON.parse(req.responseText);
             // 最初に検出された書籍情報を画面に表示
-            document.getElementById('bookarea').innerHTML = '名称 : ' +
-            res.items[0].volumeInfo.title + '<br />' +
+            document.getElementById('bookarea').innerHTML =
+            '名称 : ' + res.items[0].volumeInfo.title + '<br />' +
             '説明 : ' + res.items[0].volumeInfo.description;
         }
         if(req.status >= 400){
